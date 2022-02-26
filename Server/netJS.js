@@ -5,7 +5,6 @@ Address: levi@proc.hu
 */
 import WebSocket, { WebSocketServer } from "ws";
 import httpsServer from './httpsServer.js';
-
 /**
  * @type {WebSocketServer}
  */
@@ -47,6 +46,15 @@ class EmitEvents {
             this._events[data.id](socket, data.data);
         }
     }
+
+    /**
+     * Sends a NetJS message to the given socket
+     * @param {WebSocket} socket 
+     * @param {EmitData} data 
+     */
+    static sendMessage(socket, data){
+        socket.send(JSON.stringify(data));
+    }
 }
 
 class EmitData {
@@ -61,7 +69,7 @@ class EmitData {
     }
 }
 
-export default class wsa {
+export default class netJS {
     static EmitData = EmitData;
     static EmitEvents = EmitEvents;
     static initilaliseWebSocketServer = initilaliseWebSocketServer;
