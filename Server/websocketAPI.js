@@ -69,19 +69,18 @@ export default class wsa {
 }
 
 /**
- * Előkészíti használatra az SSL/TLS-es WebSocketServer-t (Port: 9069)
+ * Sets up the server (Port: 8080)
  */
 function initilaliseWebSocketServer() {
-    wss = new WebSocketServer({ /*port: 9069*/ server: httpsServer });
-    Logger.passed('WebSocket szerver előkészítve.');
+    wss = new WebSocketServer({ /*port: 8080*/ server: httpsServer });
+    console.log('WebSocket server has been set up');
     httpsServer.listen(8080);
-    Logger.passed('A WebSocket/HTTPS szerver várja a kapcsolatokat.');
+    console.log('The WebSocket/HTTPS server is waiting for incoming connections.');
 
     wss.addListener('connection', (socket, req) => {
-        Logger.info(`Új kliens csatlakozott: ${req.socket.remoteAddress}:${req.socket.remotePort} (${req.socket.remoteFamily})`);
+        console.log(`A client has connected: ${req.socket.remoteAddress}:${req.socket.remotePort} (${req.socket.remoteFamily})`);
 
         socket.addListener('message', (data) => {
-            //Logger.info(`Adat jött innen: ${req.socket.remoteAddress}:${req.socket.remotePort} (${req.socket.remoteFamily})\nAdat:${data.toString()}`);
             var obj;
             try {
                 obj = JSON.parse(data.toString());
@@ -95,11 +94,8 @@ function initilaliseWebSocketServer() {
     });
 
     wss.addListener('close', () => {
-        Logger.info('Egy kliens lecsatlakozott.');
+        console.log('A client disconnected');
     });
 }
 
-
-//export default { EmitData, EmitEvents, initilaliseWebSocketServer, wss };
-
-Logger.passed("Saját WebSocket API betöltve.");
+console.log("NetJS loaded!");
