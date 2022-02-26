@@ -1,5 +1,5 @@
 # NetJS
-NetJS is a JavaScript library for trasmitting data with websockets between clientside and serverside made by Levente Balogh, a computer science from Hungary.
+NetJS is a JavaScript library for transmitting data with websockets between clientside and serverside made by Levente Balogh, a computer science student from Hungary.
 
 ### Requirements:
  - Server side:
